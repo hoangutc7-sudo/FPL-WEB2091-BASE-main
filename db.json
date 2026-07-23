@@ -1,0 +1,25 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "title": "Javascript cơ bản",
+      "duration": 10,
+      "thumbnail": "https://topviecit.vn/blog/wp-content/uploads/2021/11/javascript-2.jpeg",
+      "category": "Javascript"
+    },
+    {
+      "title": "46346346346",
+      "duration": 34643643643,
+      "thumbnail": "346346346",
+      "category": "Frontend",
+      "id": 2
+    },
+    {
+      "title": "346346436436",
+      "duration": 4364634,
+      "thumbnail": "43646346436346",
+      "category": "Frontend",
+      "id": 3
+    }
+  ]
+}
