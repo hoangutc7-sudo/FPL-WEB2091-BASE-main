@@ -1,8 +1,9 @@
 import { useMutation , useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button , Image, Popconfirm , Table } from "antd";
+import { Button ,  Popconfirm , Table } from "antd";
 import axios from "axios";
 import toast from "react-hot-toast";
 import type { Course } from "../types"
+import { useNavigate } from "react-router-dom";
 
 
 function ListPage() {
@@ -29,6 +30,8 @@ function ListPage() {
     },
   });
 
+  const navigate = useNavigate();
+
   const columns = [
     {
       title: "Tiêu đề",
@@ -41,10 +44,6 @@ function ListPage() {
     {
       title: "Hình Ảnh",
       dataIndex: "thumbnail",
-
-      render: (image: string) => (
-        <Image width={80} src={image} />
-      ),
     },
     {
       title: "Danh mục",
@@ -52,18 +51,20 @@ function ListPage() {
     },
     {
       title: "Action",
+      render: (_: any, record: Course) => (
+        <div style={{ display: "flex", gap: 8 }}>
+          <Button onClick={() => navigate(`/edit/${record.id}`)}>Sửa</Button>
 
-      render: (_: any,record: Course) => (
-        <Popconfirm
-        title="Bạn có muốn xóa không?"
-        onConfirm={() => mutation.mutate(record.id)}>
-          <Button danger>Xóa</Button>
-        </Popconfirm>
+          <Popconfirm
+            title="Bạn có muốn xóa không?"
+            onConfirm={() => mutation.mutate(record.id)}
+          >
+            <Button danger>Xóa</Button>
+          </Popconfirm>
+        </div>
       ),
     },
-
   ];
-
 
   return (
     <div className="p-6">
