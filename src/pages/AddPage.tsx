@@ -1,26 +1,23 @@
 import { useMutation } from "@tanstack/react-query";
-import { Button, Form, Input, InputNumber, Select } from "antd";
+import { Button, Form, Input, Select, message  } from "antd";
 import axios from "axios";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
 function AddPage() {
-  const navigate = useNavigate();
-
-  const mutation = useMutation({
-    mutationFn: async (values: any) => {
-      await axios.post("http://localhost:3000/courses", values);
-    },
-
-    onSuccess: () => {
-      toast.success("Thêm thành công");
-      navigate("/list");
-    },
-  });
-
-  const onFinish = (values: any) => {
-    mutation.mutate(values);
+  const onFinish = (data: any) => {
+    mutate(data);
   };
+
+  const { mutate } = useMutation({
+  mutationFn: async (data: any) => {
+    return await axios.post("http://localhost:3000/courses", data);
+  },
+  onSuccess: () => {
+    message.success("Thêm khóa học thành công");
+  },
+  onError: () => {
+    message.error("Thêm khóa học thất bại");
+  },
+});
 
   return (
     <div className="p-6">
@@ -31,87 +28,58 @@ function AddPage() {
         className="space-y-6"
         onFinish={onFinish}
       >
+        {/* Text input */}
         <Form.Item
-          label="Tiêu đề"
+          label="title"
           name="title"
-          rules={[
-            {
-              required: true,
-              message: "Vui lòng nhập tiêu đề",
-            },
-            {
-              min: 5,
-              message: "Tiêu đề tối thiểu 5 ký tự",
-            },
-          ]}
+          rules={[{ required: true }]}
         >
-          <Input placeholder="Nhập tiêu đề khóa học" />
+          <Input placeholder="Nhập thông tin" />
         </Form.Item>
 
+        {/* Text input */}
         <Form.Item
-          label="Thời lượng"
+          label="duration"
           name="duration"
-          rules={[
-            {
-              required: true,
-              message: "Vui lòng nhập thời lượng",
-            },
-          ]}
+          rules={[{ required: true }]}
         >
-          <InputNumber
-            min={0}
-            placeholder="Nhập thời lượng"
-            style={{ width: "100%" }}
-          />
+          <Input placeholder="Nhập thông tin" />
         </Form.Item>
 
         <Form.Item
-          label="Hình ảnh"
+          label="thumbnail"
           name="thumbnail"
-          rules={[
-            {
-              required: true,
-              message: "Vui lòng nhập hình ảnh",
-            },
-          ]}
+          rules={[{ required: true }]}
         >
-          <Input placeholder="Nhập URL hình ảnh" />
+          <Input placeholder="Nhập link ảnh" />
         </Form.Item>
 
+        {/* Select */}
         <Form.Item
           label="Danh mục"
           name="category"
-          rules={[
-            {
-              required: true,
-              message: "Vui lòng chọn danh mục",
-            },
-          ]}
+          rules={[{ required: true }]}
         >
           <Select
             placeholder="Chọn danh mục"
             options={[
               {
-                label: "Frontend",
-                value: "Frontend",
+                value: "JS",
+                label: "JS",
               },
               {
-                label: "Backend",
-                value: "Backend",
+                value: "React",
+                label: "React",
               },
               {
-                label: "Mobile",
-                value: "Mobile",
+                value: "NodeJS",
+                label: "NodeJS",
               },
             ]}
           />
         </Form.Item>
-
-        <Button
-          type="primary"
-          htmlType="submit"
-          loading={mutation.isPending}
-        >
+        {/* Submit button */}
+        <Button type="primary" htmlType="submit">
           Submit
         </Button>
       </Form>

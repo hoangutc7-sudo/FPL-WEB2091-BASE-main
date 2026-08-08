@@ -9,19 +9,17 @@ function App() {
     <>
       <nav className="bg-blue-600 text-white shadow">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="text-xl font-semibold">
+          <Link to="#" className="text-xl font-semibold">
             <strong>WEB2091 App</strong>
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="hover:text-gray-200">
+            <Link to="#" className="hover:text-gray-200">
               Trang chủ
             </Link>
-
             <Link to="/list" className="hover:text-gray-200">
               Danh sách
             </Link>
-
             <Link to="/add" className="hover:text-gray-200">
               Thêm mới
             </Link>
@@ -31,7 +29,6 @@ function App() {
             <Link to="#" className="hover:text-gray-200">
               Đăng nhập
             </Link>
-
             <Link to="#" className="hover:text-gray-200">
               Đăng ký
             </Link>
@@ -40,22 +37,12 @@ function App() {
       </nav>
 
       {/* MAIN CONTENT */}
-      <div className="max-w-6xl mx-auto mt-10 px-4">
-          <Routes>
-          <Route
-            path="/"
-            element={
-              <h1 className="text-4xl font-bold mb-4 text-center">
-                Chào mừng đến với WEB2091
-              </h1>
-            }
-          />
-
-          <Route path="/list" element={<ListPage />} />
-
-          <Route path="/edit/:id" element={<EditPage />} />
-
-          <Route path="/add" element={<AddPage />} />
+      <div className="max-w-6xl mx-auto mt-10 px-4 text-center">
+        <h1 className="text-4xl font-bold mb-4">Chào mừng đến với WEB2091</h1>
+        <Routes>
+         <Route path="/list" element={<ListPage />} />
+         <Route path="/add" element={<AddPage />} />
+         <Route path="/edit/:id" element={<EditPage />} />
         </Routes>
       </div>
 
